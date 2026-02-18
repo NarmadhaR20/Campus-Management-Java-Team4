@@ -1,0 +1,10 @@
+# Frontend
+Campus-Frontend/node_modules/
+Campus-Frontend/dist/
+Campus-Frontend/.vite/
+
+# Backend
+Campus-Backend/target/
+
+# Environment
+.env

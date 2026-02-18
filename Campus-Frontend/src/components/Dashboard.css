@@ -1,0 +1,236 @@
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    background: #6200ea;
+    /* Exact purple from screenshot */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 30px 0;
+}
+
+.sidebar-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #6200ea;
+    margin-bottom: 16px;
+}
+
+.profile-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.profile-role {
+    font-size: 12px;
+    opacity: 0.8;
+    margin: 4px 0 0 0;
+}
+
+.sidebar-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 15px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.2s;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item.active {
+    background: white;
+    color: #6200ea;
+}
+
+.logout-btn-container {
+    padding: 0 15px;
+    margin-top: auto;
+}
+
+.logout-sidebar-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px;
+    background: rgba(0, 0, 0, 0.2);
+    border: none;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: 0.2s;
+    font-size: 14px;
+}
+
+.logout-sidebar-btn:hover {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Layout Stuff */
+.layout-container {
+    display: flex;
+    min-height: 100vh;
+    background: #fdfdfd;
+}
+
+.content-area {
+    flex: 1;
+    margin-left: 280px;
+    padding: 40px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.header-title-section h1 {
+    font-size: 28px;
+    color: #1a1a1a;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+}
+
+.header-title-section h1::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #6200ea;
+    border-radius: 2px;
+}
+
+.header-user-badge {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.badge-text {
+    text-align: right;
+}
+
+.badge-welcome {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.badge-name {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #6200ea;
+}
+
+.logout-icon-btn {
+    padding: 8px;
+    background: #fee2e2;
+    color: #ef4444;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #6200ea;
+}
+
+.stat-label {
+    display: block;
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1e293b;
+}
+
+.stat-badge-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #eff6ff;
+}
+
+.welcome-hero {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 24px;
+    padding: 80px 40px;
+    text-align: center;
+}
+
+.welcome-hero h2 {
+    font-size: 24px;
+    color: #1e293b;
+    margin-bottom: 12px;
+}
+
+.welcome-hero p {
+    color: #64748b;
+    font-size: 14px;
+}
