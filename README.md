@@ -7,7 +7,6 @@ Digital Resource Booking System
 
 🏢 Multi-Role Portals:
      Admin Dashboard: Full control over campus resources. Approve or reject formal booking requests and provide detailed feedback for denials. Monitor the entire university schedule in real-time.
-     
      Faculty Portal: Formalize resource requests for workshops or labs. Review event suggestions from students and convert them into official booking requests.
      Student Dashboard: Propose event ideas directly to faculty. Track the status of suggestions and view a comprehensive campus-wide event schedule.
      
