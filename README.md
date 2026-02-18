@@ -21,12 +21,14 @@ Digital Resource Booking System
 
       
 🚀 Technical Stack:
-Frontend
 
+Frontend
   Framework: React.js
   Icons: Lucide-React
   API Client: Axios
   Styling: Premium Vanilla CSS (Glassmorphism & Vibrant Aesthetic)
+
+  
 Backend
 
   Framework: Spring Boot (Java)
