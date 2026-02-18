@@ -23,6 +23,7 @@ Digital Resource Booking System
 🚀 Technical Stack:
 
 Frontend
+
   Framework: React.js
   Icons: Lucide-React
   API Client: Axios
