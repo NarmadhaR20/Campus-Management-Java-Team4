@@ -115,6 +115,7 @@ export const requestAPI = {
 export const userAPI = {
     getAll: () => api.get('/users'),
     getFaculties: () => api.get('/users/faculties'),
+    create: (data) => api.post('/users', { ...data, status: 'ACTIVE' }),
     delete: (id) => api.delete(`/users/${id}`)
 };
 

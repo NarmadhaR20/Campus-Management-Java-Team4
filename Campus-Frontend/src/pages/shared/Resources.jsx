@@ -80,7 +80,18 @@ const Resources = ({ role }) => {
                     <button
                         onClick={() => setShowAddModal(true)}
                         className="auth-button"
-                        style={{ width: 'auto', padding: '10px 20px', display: 'flex', alignItems: 'center', gap: '8px' }}
+                        style={{
+                            width: 'auto',
+                            padding: '10px 24px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            background: 'linear-gradient(135deg, #ff0055 0%, #d40046 100%)',
+                            border: 'none',
+                            boxShadow: '0 4px 15px rgba(255, 0, 85, 0.25)',
+                            borderRadius: '12px',
+                            transition: 'all 0.3s ease'
+                        }}
                     >
                         <Plus size={18} /> Add Resource
                     </button>
@@ -157,13 +168,16 @@ const Resources = ({ role }) => {
                         </div>
 
                         <form onSubmit={handleAddResource} className="smart-form" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                            <div className="smart-input-group">
+                            <div className="smart-input-group" title="Must contain at least one letter">
                                 <span><Building2 size={18} /></span>
                                 <input
                                     type="text"
-                                    placeholder="Resource Name (e.g. CyberDome)"
+                                    placeholder="Resource Name (Max 40 chars)"
                                     value={newResource.name}
                                     onChange={(e) => setNewResource({ ...newResource, name: e.target.value })}
+                                    maxLength={40}
+                                    pattern=".*[a-zA-Z].*"
+                                    title="Resource name must contain at least one letter"
                                     required
                                 />
                             </div>
@@ -186,20 +200,25 @@ const Resources = ({ role }) => {
                                 <span><Users size={18} /></span>
                                 <input
                                     type="number"
-                                    placeholder="Capacity (Number of persons)"
+                                    placeholder="Capacity (Max 2000)"
                                     value={newResource.capacity}
                                     onChange={(e) => setNewResource({ ...newResource, capacity: e.target.value })}
+                                    min={1}
+                                    max={2000}
                                     required
                                 />
                             </div>
 
-                            <div className="smart-input-group">
+                            <div className="smart-input-group" title="Must contain at least one letter">
                                 <span><MapPin size={18} /></span>
                                 <input
                                     type="text"
-                                    placeholder="Location (Block/Floor)"
+                                    placeholder="Location (Block/Floor) - Max 50 chars"
                                     value={newResource.location}
                                     onChange={(e) => setNewResource({ ...newResource, location: e.target.value })}
+                                    maxLength={50}
+                                    pattern=".*[a-zA-Z].*"
+                                    title="Location must contain at least one letter"
                                     required
                                 />
                             </div>

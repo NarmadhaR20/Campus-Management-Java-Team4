@@ -1,13 +1,21 @@
 import { useState, useEffect } from 'react';
 import Layout from '../../components/Layout';
 import { userAPI } from '../../services/api';
-import { Trash2, UserPlus, Search, User } from 'lucide-react';
+import { Trash2, UserPlus, Search, User, X, Lock } from 'lucide-react';
 import '../../components/Dashboard.css';
 
 const ManageUsers = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [showAddModal, setShowAddModal] = useState(false);
+    const [newUser, setNewUser] = useState({
+        name: '',
+        email: '',
+        password: '',
+        role: 'STUDENT',
+        department: ''
+    });
 
     useEffect(() => {
         fetchUsers();
@@ -21,6 +29,19 @@ const ManageUsers = () => {
             console.error(err);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const handleAddUser = async (e) => {
+        e.preventDefault();
+        try {
+            await userAPI.create(newUser);
+            alert('User registered successfully');
+            setShowAddModal(false);
+            setNewUser({ name: '', email: '', password: '', role: 'STUDENT', department: '' });
+            fetchUsers();
+        } catch (err) {
+            alert(err.response?.data?.message || 'Failed to register user');
         }
     };
 
@@ -53,7 +74,120 @@ const ManageUsers = () => {
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
+                <button
+                    onClick={() => setShowAddModal(true)}
+                    className="auth-button"
+                    style={{
+                        width: 'auto',
+                        padding: '10px 20px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        background: 'linear-gradient(135deg, #6200ea 0%, #3700b3 100%)',
+                        border: 'none',
+                        boxShadow: '0 4px 12px rgba(98, 0, 234, 0.2)'
+                    }}
+                >
+                    <UserPlus size={18} /> Add User
+                </button>
             </div>
+
+            {showAddModal && (
+                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.6)', backdropFilter: 'blur(8px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
+                    <div style={{ background: 'white', padding: '40px', borderRadius: '24px', width: '450px', maxWidth: '95%', position: 'relative', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}>
+                        <button
+                            onClick={() => setShowAddModal(false)}
+                            style={{ position: 'absolute', right: '24px', top: '24px', border: 'none', background: '#f1f5f9', padding: '8px', borderRadius: '12px', cursor: 'pointer', color: '#64748b' }}
+                        >
+                            <X size={20} />
+                        </button>
+
+                        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+                            <div style={{ width: '60px', height: '60px', background: '#f5f3ff', color: '#6200ea', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+                                <UserPlus size={32} />
+                            </div>
+                            <h2 style={{ fontSize: '24px', fontWeight: 800, color: '#1e293b', margin: 0 }}>Create New User</h2>
+                            <p style={{ color: '#64748b', fontSize: '14px', marginTop: '8px' }}>Register a new account in the system</p>
+                        </div>
+
+                        <form onSubmit={handleAddUser} className="smart-form" style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                            <div className="smart-input-group">
+                                <span><User size={18} /></span>
+                                <input
+                                    type="text"
+                                    placeholder="Full Name (Max 50 chars)"
+                                    value={newUser.name}
+                                    onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
+                                    maxLength={50}
+                                    pattern=".*[a-zA-Z].*"
+                                    title="Name must contain at least one letter"
+                                    required
+                                />
+                            </div>
+
+                            <div className="smart-input-group">
+                                <span><User size={18} /></span>
+                                <input
+                                    type="email"
+                                    placeholder="Email Address"
+                                    value={newUser.email}
+                                    onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+                                    maxLength={80}
+                                    required
+                                />
+                            </div>
+
+                            <div className="smart-input-group">
+                                <span><User size={18} /></span>
+                                <select
+                                    value={newUser.role}
+                                    onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
+                                    style={{ paddingLeft: '45px' }}
+                                >
+                                    <option value="STUDENT">Student</option>
+                                    <option value="FACULTY">Faculty</option>
+                                    <option value="ADMIN">Administrator</option>
+                                </select>
+                            </div>
+
+                            <div className="smart-input-group">
+                                <span><User size={18} /></span>
+                                <select
+                                    value={newUser.department}
+                                    onChange={(e) => setNewUser({ ...newUser, department: e.target.value })}
+                                    style={{ paddingLeft: '45px' }}
+                                    required
+                                >
+                                    <option value="">Select Department</option>
+                                    <option value="CSE">Computer Science (CSE)</option>
+                                    <option value="ECE">Electronics (ECE)</option>
+                                    <option value="IT">Information Technology (IT)</option>
+                                    <option value="MECH">Mechanical (MECH)</option>
+                                    <option value="CIVIL">Civil Engineering</option>
+                                    <option value="MBA">Management (MBA)</option>
+                                    <option value="SCIENCE">Science & Humanities</option>
+                                </select>
+                            </div>
+
+                            <div className="smart-input-group">
+                                <span><Lock size={18} /></span>
+                                <input
+                                    type="password"
+                                    placeholder="Initial Password (Min 6)"
+                                    value={newUser.password}
+                                    onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
+                                    minLength={6}
+                                    required
+                                />
+                            </div>
+
+                            <button type="submit" className="smart-btn" style={{ marginTop: '10px' }}>
+                                REGISTER USER
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
 
             <div style={{ background: 'white', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
